@@ -1,58 +1,52 @@
 # MS-Zusteller
-This is the **Web front-end** of the Microservice application that shows the location of a simulated vehicle using google MAP API.
-This vehicle, fetches the latest position(SYNCHRONOUS REST call) from a Microservices called **MS-GeoPosition-Tracker** that fetches 
+This is the **Web front-end** of the Microservice application that shows the location of a simulated deliverer using google MAP API.
+Displays the live location by polling (PULL) the latest position(SYNCHRONOUS REST call) from a Microservices called **MS-GeoPosition-Tracker** that itself fetches 
 the geolocation(GPX data) from "ApacheMQ Messaging QUEUE" through a RESTful call and is interpreted my Google MAP API.
 
+## Technical Stack
+ **Languages, frameworks library used**: Java 8, Spring Boot 1.5, Spring WebMVC, JSP, Google Maps API, Spring Cloud Eureka Client).
+ **Build tools** (Maven/Gradle).
+
 We can see the position of the vehicle changing with each refresh of the browser that we make. This makes a REST call for the location GPX data.
-This is a complete Microservice Application to SEE the live position of Deliverer(Zusteller) like Hermes or Otto provides the real-time 
-info on location of the delivery vehicle.
+This is a complete Microservice Application to SEE the live position of a Deliverer(Zusteller). The live position is simulated by using GPX data of a stretch.
 
-## Getting Started
+
+## Other Microservices that works together
 There are 6 Microservices
-1. MS-Eureka-Registry
-2. MS-global-config
-3. MS-GeoPosition-Tracker
-4. MS-GeoLocation
-5. ActiveMQ Broker
+1. MS-Eureka-Registry (This makes service discover automated, for communication with MS.)
+2. MS-global-config (Optional! if we want to completely separate configurations.)
+3. ActiveMQ Broker (Main decoupling mechanism between sender and receiver of GPX data.)
+4. MS-GeoLocation (Simulates the sending of GPX data to the message queue.)
+5. MS-GeoPosition-Tracker (Reads the data from Queue and exposes as REST service.)
+**6. MS-Zusteller** (This service, this fetches the data and visualises through Google-MAP API.)
 
-**6. MS-Zusteller**
+When all of the are running, we can see the movement appearing as live position of deliverer by refreshing (reloading) the browser. The GPX data is simulated and is not real time data.
 
-[Clone the project and open the application with STS/Eclipse/intellij IDE and run as Spring-Boot application on your local machine for development and testing purposes. 
-See deployment for notes on how to deploy the project on a live system.]
-
-### Prerequisites
+### Useful localhost links for easy access:
 
 ```
-Please clone the other applications and start with the above ORDER in new STS workspace. 
-This can be done by simply double-clicking the STS.exe and selecting the Workspace where it 
-has been cloned seperately. Start a new JAVA Project and MS-Eureka-Registry Server will start at 
-http://localhost:8010/ and all other Microservices will register itself at start-up with 
-Netflix Eureka for Service Registration & Discovery.
+MS-Eureka-Registry Server: http://localhost:8010/
+ApacheMQ dashboard: http://localhost:8161/admin/queues.jsp  (with admin:admin as ID and Password)
+Zusteller (this front end) http://localhost:8080/website/vehicles/vehicle/BMW 
 ```
 
 ## Consumer Contract tests
 ```
-Will be implemented
+Try it as excercise!
 ```
 ## Deployment
 
-Each Microservices has been deployed with Docker SWARM and Kubernetes on AWS and GIST will be made available soon.
-
-## Built With
-
-* [SpringBoot 1.5](http://start.spring.io) The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-
+Each Microservices has been deployed with Docker SWARM and Kubernetes on AWS.
+Another version as instances runing on EC2
 
 ## Versioning
 
-Still Version 1.0
-I use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/vimalkrishna/MS-Zusteller/tags). 
+Version 1.0
+I use [SemVer](http://semver.org/) for versioning. 
+
 
 ## Authors
+* **vimal krishna** 
 
-* **vimal krishna** - *Initial work* - 
 ## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
+This project is licensed under the MIT License.
