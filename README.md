@@ -14,13 +14,15 @@ This is a complete Microservice Application to SEE the live position of a Delive
 
 ## Other Microservices that works together
 There are 6 Microservices
-1. [MS-Eureka-Registry](https://github.com/vimalkrishna/MS-Eureka-Registry){:target="_blank" rel="noopener"}  (This makes service discover automated, for communication with MS.)
-2. [MS-global-config](https://github.com/vimalkrishna/MS-global-config){:target="_blank" rel="noopener"} (Optional! if we want to completely separate configurations.){:target="_blank" rel="noopener"}
+1. <a href="https://github.com/vimalkrishna/MS-Eureka-Registry" target="_blank" rel="noopener">MS-Eureka-Registry</a> (This makes service discover automated, for communication with MS.)
+2. <a href="https://github.com/vimalkrishna/MS-global-config" target="_blank" rel="noopener">MS-global-config</a>(Optional! if we want to completely separate configurations.) {:target="_blank" rel="noopener"}
 3. ActiveMQ Broker (Main decoupling mechanism between sender and receiver of GPX data.) This is a standalone application and you run it locally. I had apache-activemq-5.14.0 running.
-4. [MS-GeoLocation](https://github.com/vimalkrishna/MS-GeoLocation){:target="_blank" rel="noopener"} (Simulates the sending of GPX data to the message queue.)
-5. [MS-GeoPosition-Tracker](https://github.com/vimalkrishna/MS-GeoPosition-Tracker){:target="_blank" rel="noopener"} (Reads the data from Queue and exposes as REST service.)
+4. <a href="https://github.com/vimalkrishna/MS-GeoLocation" target="_blank" rel="noopener">MS-GeoLocation</a>
+(Simulates the sending of GPX data to the message queue.)
+5. <a href="https://github.com/vimalkrishna/MS-GeoPosition-Tracker" target="_blank" rel="noopener">MS-GeoPosition-Tracker</a>
+(Reads the data from Queue and exposes as REST service.)
 
-**6. MS-Zusteller** (This service, this fetches the data and visualises through Google-MAP API.)
+**6. MS-Zusteller** (This service, fetches the GPX data from Microservice GeoPosition-Tracker as REST call and visualises through Google-MAP API.)
 
 When all of the are running, we can see the movement appearing as live position of deliverer by refreshing (reloading) the browser. The GPX data is simulated and is not real time data.
 
